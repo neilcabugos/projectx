@@ -14,3 +14,5 @@ Profile
         <td><%= current_user.email %></td>
     </tr>
 </table>
+
+<%= button_to "logout", destroy_user_session_path, method: :delete  %>
