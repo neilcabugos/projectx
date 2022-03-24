@@ -3,15 +3,12 @@ networks:
   development:
 volumes:
   db_data:
-  gem_cache:
-  shared_data:
 services:
   db:
     image: mariadb:10.5.8
     container_name: projectx_db
     volumes:
-      - db_data:/var/lib/mysql/data
-      - shared_data:/var/shared
+      - db_data:/var/lib/mysql
     networks:
       - development
     environment:
@@ -25,8 +22,6 @@ services:
     container_name: projectx_web
     volumes:
       - .:/var/app
-      - shared_data:/var/shared
-      - gem_cache:/user/local/bundle/gems
     networks:
       - development
     ports:

@@ -5,7 +5,7 @@ set -e
 echo "ENVIRONMENT: $RAILS_ENV"
 
 # check bundle
-bundle check || bundle install
+bundle install
 
 # remove pid from previous session (puma server)
 

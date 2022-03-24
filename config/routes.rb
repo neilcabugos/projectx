@@ -1,3 +1,9 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  mount RailsAdmin::Engine => '/command_center/super_admin', as: 'rails_admin'
+  root to: "members#index"
+
+  get 'member', to: 'members#index'
+  get 'admin', to: 'admins#index'
+  devise_for :users
+  
 end
