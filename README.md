@@ -1,24 +1,14 @@
-# README
+# Projectx
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Rails project with [devise](https://github.com/heartcombo/devise), [cancancan](https://github.com/CanCanCommunity/cancancan), [rails_admin](https://github.com/railsadminteam/rails_admin) integration
 
-Things you may want to cover:
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Check it out!
+To start up the application in your local Docker environment:
+```bash
+git clone https://github.com/neilcabugos/projectx.git
+cd projectx
+docker-compose build
+docker-compose run --rm web rails db:create db:migrate db:seed
+docker-compose up
+```
