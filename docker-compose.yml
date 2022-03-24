@@ -1,0 +1,46 @@
+version: '3'
+networks:
+  development:
+volumes:
+  db_data:
+  gem_cache:
+  shared_data:
+services:
+  db:
+    image: mariadb:10.5.8
+    container_name: projectx_db
+    volumes:
+      - db_data:/var/lib/mysql/data
+      - shared_data:/var/shared
+    networks:
+      - development
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - 3306:3306
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: projectx_web
+    volumes:
+      - .:/var/app
+      - shared_data:/var/shared
+      - gem_cache:/user/local/bundle/gems
+    networks:
+      - development
+    ports:
+      - 3000:3000
+    stdin_open: true
+    tty: true
+    entrypoint: docker-entrypoint.sh
+    command: ['rails','s','-p','3000','-b','0.0.0.0']
+    environment:
+      RAILS_ENV: development
+      DB_USER: root
+      DB_PASSWORD: password
+      DB_HOST: projectx_db
+      DB_NAME_DEV: projectx_dev
+      DB_NAME_TEST: projectx_test
+    depends_on:
+      - db
